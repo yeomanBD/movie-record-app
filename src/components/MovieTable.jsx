@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
+import TableHeader from "./TableHeader";
+import TableBody from "./TableBody";
 
-class MovieTable extends Component {
-  state = {};
-  render() {
-    return (
-      <div>
-        <h1>Hello from movie table</h1>
-      </div>
-    );
-  }
-}
+const MovieTable = () => {
+  return (
+    <table className="table">
+      <TableHeader />
+      <TableBody />
+    </table>
+  );
+};
 
 export default MovieTable;
