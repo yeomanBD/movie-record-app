@@ -1,28 +1,25 @@
-import React from "react"; //, { Component }
+import React, { Component } from "react";
 
-const TableBody = props => {
-  return (
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  );
-};
+class TableBody extends Component {
+  renderCell = (movie, item) => {
+    console.log(typeof item.marker);
+    return item.marker;
+  };
+
+  render() {
+    const { data, headers } = this.props;
+    return (
+      <tbody>
+        {data.map(movie => (
+          <tr>
+            {headers.map(item => (
+              <td>{this.renderCell(movie, item)}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    );
+  }
+}
 
 export default TableBody;

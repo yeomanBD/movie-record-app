@@ -5,9 +5,9 @@ import MovieRecord from "./components/MovieRecords";
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <React.Fragment>
         <MovieRecord />
-      </div>
+      </React.Fragment>
     );
   }
 }

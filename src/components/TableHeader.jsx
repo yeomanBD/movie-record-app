@@ -2,13 +2,15 @@ import React, { Component } from "react";
 
 class TableHeader extends Component {
   render() {
+    const { headers } = this.props;
     return (
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          {headers.map(col => (
+            <th key={col.marker} scope="col">
+              {col.label}
+            </th>
+          ))}
         </tr>
       </thead>
     );

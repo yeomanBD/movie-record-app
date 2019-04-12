@@ -35,6 +35,10 @@ class MovieRecord extends Component {
     this.setState({ selectedItem: genre });
   };
 
+  handleTotalMovies = () => {
+    return this.state.movies.length;
+  };
+
   render() {
     return (
       <div className="row">
@@ -46,8 +50,8 @@ class MovieRecord extends Component {
           />
         </div>
         <div className="col">
-          <p>Showing 10 movies in the database.</p>
-          <MovieTable />
+          <p>Showing {this.handleTotalMovies()} movies in the database.</p>
+          <MovieTable movies={this.state.movies} />
         </div>
       </div>
     );
