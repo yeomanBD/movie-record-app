@@ -21,7 +21,7 @@ const movies = [
     genre: { id: "3", name: "Thriller" },
     stock: 8,
     rate: 3.5,
-    liked: true
+    liked: false
   },
   {
     id: "4",
@@ -75,4 +75,20 @@ const movies = [
 
 export function getMovies() {
   return movies;
+}
+
+export function saveMovie(movie) {
+  let lastMovie = movies[movies.length - 1];
+
+  movie.id = parseInt(lastMovie.id) + 1 + "";
+  movie.genre = { id: movie.id, name: movie.genreName };
+
+  movies.push(movie);
+}
+
+export function deleteMovie(id) {
+  let movieInDb = movies.find(m => m.id === id);
+  console.log(movieInDb);
+  movies.splice(movies.indexOf(movieInDb), 1);
+  return movieInDb.id;
 }

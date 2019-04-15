@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MovieTable from "./MovieTable";
-import { getMovies } from "../data/moviesData";
+import * as DBService from "../data/MoviesDB";
 import ListGroup from "./ListGroup";
 
 class MovieRecord extends Component {
@@ -10,7 +10,7 @@ class MovieRecord extends Component {
   };
 
   componentDidMount() {
-    const movies = getMovies();
+    const movies = DBService.getMovies();
     const genres = this.getGenre(movies);
 
     this.setState({ movies, genres });
@@ -39,6 +39,26 @@ class MovieRecord extends Component {
     return this.state.movies.length;
   };
 
+  handleDeleteMovie = movie => {
+    const movies = this.state.movies.filter(item => item !== movie);
+    this.setState({ movies });
+    let deleteItemId = DBService.deleteMovie(movie.id);
+    console.log(`Movie of Id : ${deleteItemId} is successfully deleted.`);
+  };
+
+  handleLikedMovie = movie => {
+    const updatedMovies = this.state.movies.map(item => {
+      if (item.id === movie.id) {
+        if (item.liked !== null) {
+          item.liked = item.liked ? false : true;
+        } else {
+          item.liked = true;
+        }
+      }
+    });
+    this.setState({ updatedMovies });
+  };
+
   render() {
     return (
       <div className="row">
@@ -51,7 +71,11 @@ class MovieRecord extends Component {
         </div>
         <div className="col">
           <p>Showing {this.handleTotalMovies()} movies in the database.</p>
-          <MovieTable movies={this.state.movies} />
+          <MovieTable
+            movies={this.state.movies}
+            onDelete={this.handleDeleteMovie}
+            onLiked={this.handleLikedMovie}
+          />
         </div>
       </div>
     );
