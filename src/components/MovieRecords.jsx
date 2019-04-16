@@ -6,7 +6,8 @@ import ListGroup from "./ListGroup";
 class MovieRecord extends Component {
   state = {
     movies: [],
-    genres: []
+    genres: [],
+    pageSize: 3
   };
 
   componentDidMount() {
@@ -75,6 +76,8 @@ class MovieRecord extends Component {
             movies={this.state.movies}
             onDelete={this.handleDeleteMovie}
             onLiked={this.handleLikedMovie}
+            totalItems={this.state.movies.length}
+            pageSize={this.state.pageSize}
           />
         </div>
       </div>
